@@ -30,7 +30,6 @@ jobs:
         sudo apt-get update
         sudo apt-get install -qqy x11-apps
         sudo apt install xorg-dev libx11-dev libgl1-mesa-glx
-        xhost +
 
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
@@ -40,6 +39,8 @@ jobs:
         pre-commit run --all-files
     - name: Test with pytest
       run: |
+        xhost +
+
 
 
         pytest
