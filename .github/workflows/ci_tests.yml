@@ -15,23 +15,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.x
+    - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
-        python-version: "3.x"
+        python-version: "3.9"
     - name: Install dependencies
       run: |
-        sudo apt-get update \
-        && sudo apt-get install -y python3-pip python3-dev \
-        && cd /usr/local/bin \
-        && ln -s /usr/bin/python3 python \
-        && pip3 install --upgrade pip
+        python -m pip install --upgrade pip
         sudo apt-get install -y libsdl1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev
         sudo apt-get update
         sudo apt-get install -qqy x11-apps
         sudo apt install xorg-dev libx11-dev libgl1-mesa-glx
 
-        pip3 install -r requirements.txt
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Lint with black and flake8 and mypy
       run: |
@@ -40,7 +36,6 @@ jobs:
     - name: Test with pytest
       run: |
         xhost +
-
 
 
         pytest
