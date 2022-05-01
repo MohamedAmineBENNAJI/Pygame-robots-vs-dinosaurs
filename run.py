@@ -73,8 +73,11 @@ def main(argv):
         screen.fill((30, 30, 30))
         game.run()
 
+
         pygame.display.flip()
         clock.tick(60)
+    logging.info(f"Final Score:{game.score}")
+
 
 
 if __name__ == "__main__":
