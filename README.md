@@ -26,10 +26,10 @@ The goal of this project is to implement a simple game for robots vs dinosaurs.
 - A robot can ignite dinosaurs by moving towards them (from the left, front, back and right).
 - A robot can kill a dinosaur using 2 attacks, and once ignited by moving towards a dinosaur, it only needs 1 attack to kill it.
 - A dinosaur can attack a robot by shooting laser towards it.
-- There is a Monster dinosaur(with more health and more damage) that joins to our game from time to time.
+- There is a Monster dinosaur(with more health) that joins to our game from time to time.
 - There are some obstacles that a robot can hide behind to take cover from dinosaur attacks.
 - Each robot has 3 lives, once dead it can respawn with 50% of health before the game is over.
-- For the scoring, attacking a red dinosaur will give you 100 points, attacking a yellow dinosaur will give you 200 points and green dinosaurs will give you 300 point, whereas hitting the Monster dinosaur will give you 100 points and killing him will give you 500 points ! 
+- For the scoring, attacking a red dinosaur will give you 100 points, attacking a yellow dinosaur will give you 200 points and green dinosaurs will give you 300 point, whereas hitting the Monster dinosaur will give you 100 points per hit !
 - Dinosaurs are fixed in the simulation space but you can make them moving to make the game harder by setting the **moving_dinosaurs** flag to **True**.
 
 
@@ -47,8 +47,14 @@ python3 run.py
 ```
 - To have a different user experience, you can test the game with different settings by using these flags:
 
-* **screen_width**: the width of the simulation space you want to create.(600 by  default)
-* **screen_height**: the height of the simulation space you want to create.(600 by  default)
+* **screen_width**: the width of the simulation space you want to create.(600 by default)
+* **screen_height**: the height of the simulation space you want to create.(600 by default).
+* **number_of_dinosaur_rows**: the number of dinosaurs per row.(3 by default)
+* **number_of_dinosaur_cols**: the number of dinosaurs per column.(4 by default)
+* **obstacle_amount**: the amount of obstacles to create for hiding.(4 by default)
+**dinosaurs_shooting_timer**: the cooldown for dinosaurs weapon.(800 milliseconds by default)
+
+
 * **dinosaurs_shooting_timer**: the cooldown for dinosaurs weapon.(800 milliseconds by default)
 * **moving_dinosaurs**: a boolean specifying whether dinosaurs are moving or not.(False by default)
 
