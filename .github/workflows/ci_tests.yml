@@ -36,6 +36,5 @@ jobs:
         pre-commit run --all-files
     - name: Test with pytest
       run: |
-        export DISPLAY='IP:0.0'        
         xhost +
         pytest
