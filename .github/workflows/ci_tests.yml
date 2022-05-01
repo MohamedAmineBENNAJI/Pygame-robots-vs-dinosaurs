@@ -25,6 +25,8 @@ jobs:
         sudo apt-get install -y libsdl1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev
         sudo apt-get update
         sudo apt-get install -qqy x11-apps
+        sudo apt install xorg-dev libx11-dev libgl1-mesa-glx
+
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Lint with black and flake8 and mypy
