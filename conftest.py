@@ -1,5 +1,4 @@
 """This module includes the fixtures used in the code tests."""
-import os
 from typing import List, Tuple
 
 import pygame
@@ -9,11 +8,6 @@ from core.utils.dinosaur import Dinosaur, Monster
 from core.utils.game import Game
 from core.utils.laser import Laser
 from core.utils.robot import Robot
-
-try:
-    os.environ["DISPLAY"]
-except pygame.error:
-    os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
 @pytest.fixture(scope="session")
