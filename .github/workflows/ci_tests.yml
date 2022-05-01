@@ -24,6 +24,7 @@ jobs:
         python -m pip install --upgrade pip
         sudo apt-get install -y libsdl1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev
         sudo apt-get update
+        pip3 install python3-xlib
         sudo apt-get install -qqy x11-apps
         sudo apt install xorg-dev libx11-dev libgl1-mesa-glx
 
