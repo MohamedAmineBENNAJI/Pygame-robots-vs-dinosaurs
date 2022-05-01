@@ -35,7 +35,6 @@ jobs:
         pre-commit run --all-files
     - name: Test with pytest
       run: |
-        xhost +
 
 
         pytest
