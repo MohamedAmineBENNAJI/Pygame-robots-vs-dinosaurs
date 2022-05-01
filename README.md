@@ -1,4 +1,4 @@
-# Robots_vs_Dinosaurs Game 
+# Robots_vs_Dinosaurs Game
 
 ## Project Description and Objectives
 
@@ -29,8 +29,8 @@ The goal of this project is to implement a simple game for robots vs dinosaurs.
 - There is a Monster dinosaur(with more health) that joins to our game from time to time.
 - There are some obstacles that a robot can hide behind to take cover from dinosaur attacks.
 - Each robot has 3 lives, once dead it can respawn with 50% of health before the game is over.
-- For the scoring, attacking a red dinosaur will give you 100 points, attacking a yellow dinosaur will give you 200 points and green dinosaurs will give you 300 point, whereas hitting the Monster dinosaur will give you 100 points per hit !
-- Dinosaurs are fixed in the simulation space but you can make them moving to make the game harder by setting the **moving_dinosaurs** flag to **True**.
+- For the scoring, attacking a red dinosaur will give you 100 points per hit, attacking a yellow dinosaur will give you 200 points and green dinosaurs will give you 300 point, whereas hitting the Monster dinosaur will give you 100 points per hit !
+- Dinosaurs are fixed in the simulation space but you can make them moving to make the game harder by setting the **moving_dinosaurs** flag to **1** or **-1**.
 
 
 ## Running the Game on your local environment
@@ -56,23 +56,23 @@ python3 run.py
 
 
 * **dinosaurs_shooting_timer**: the cooldown for dinosaurs weapon.(800 milliseconds by default)
-* **moving_dinosaurs**: a boolean specifying whether dinosaurs are moving or not.(False by default)
+* **moving_dinosaurs**: an integer specifying whether dinosaurs are moving or not and the moving direction.(0 by default)
 
-## Running the Game API on using Flask 
+## Running the Game API on using Flask
 
 - Use this command to run the game API using Flask:
 
 ```
 python3 game_api.py
 ```
-- A server running the game using Flask as a backend launches our game you can open the game and start playing by clicking the link that appears in the CLI. (mine is 192.168.1.8:3000) 
+- A server running the game using Flask as a backend launches our game you can open the game and start playing by clicking the link that appears in the CLI. (mine is 192.168.1.8:3000)
 
-## Running the Game on Docker 
+## Running the Game on Docker
 
 - First, you have to build the docker container using this command:
 
 ```
-docker build -t game:latest -f docker/Dockerfile .
+docker build -t game:latest -f core/docker/Dockerfile .
 ```
 - After building the docker image, you have to grant the access to connect to the XServer for Linux by using this command:
 
