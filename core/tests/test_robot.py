@@ -7,7 +7,7 @@ class TestRobot:
 
     def test_get_damage(
         self, robot_object: Robot, current_health: int = 100, amount: int = 10
-    ):
+    ) -> None:
         """This method tests getting damage for the robot."""
         expected_health = current_health - amount
         # Initialize the robot's health with a value
@@ -16,8 +16,8 @@ class TestRobot:
         assert remaining_health == expected_health, "Check the Robot damage function !"
 
     def test_basic_health(
-        self, robot_object, current_health: int = 30, health_ratio: float = 6.0
-    ):
+        self, robot_object: Robot, current_health: int = 30, health_ratio: float = 6.0
+    ) -> None:
         """This method  tests the health bar values for the robot."""
         health_bar_value = current_health / health_ratio
         robot_object.current_health = current_health

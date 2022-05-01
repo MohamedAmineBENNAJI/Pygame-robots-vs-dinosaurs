@@ -8,7 +8,7 @@ import pygame
 class Block(pygame.sprite.Sprite):
     """This class implements blocs used to build obstacles."""
 
-    def __init__(self, size: int, color: Tuple[int, int, int], x: int, y: int):
+    def __init__(self, size: int, color: Tuple[int, int, int], x: int, y: float):
         """Initialize the Block class.
         Args:
             size: an integer specifying the size of block.

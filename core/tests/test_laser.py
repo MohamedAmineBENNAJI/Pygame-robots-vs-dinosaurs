@@ -3,6 +3,7 @@ from typing import Tuple
 
 import pygame
 import pytest
+
 from core.utils.laser import Laser
 
 
@@ -16,7 +17,7 @@ class TestLaser:
         surface_dimensions: Tuple[int, int],
         laser_position: Tuple[int, int],
         speed: int = 5,
-    ):
+    ) -> None:
         """This method tests updating the laser position vertically according to
         a specific speed and positions"""
         expected_rect = test_image.get_rect(center=laser_position)
@@ -27,7 +28,7 @@ class TestLaser:
 
     # Testing the destruction of the laser with multiple values
     @pytest.mark.parametrize("position", [-51, 150])
-    def test_destroy(self, position, laser_object):
+    def test_destroy(self, position: int, laser_object: Laser) -> None:
         """This method checks the destruction of the laser."""
         laser_object.rect.y = position
         assert laser_object.destroy(), "Laser not destructed!"

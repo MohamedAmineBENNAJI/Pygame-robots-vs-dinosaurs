@@ -1,7 +1,8 @@
 """This module contains the implementation of the robot."""
-from typing import Tuple
+from typing import Any, Tuple
 
 import pygame
+
 from core.utils.laser import Laser
 
 
@@ -9,9 +10,14 @@ class Robot(pygame.sprite.Sprite):
     """This class implements the Robot character."""
 
     def __init__(
-        self, screen: pygame.Surface, pos: Tuple[int, int], constraint: int, speed: int
-    ):
+        self,
+        screen: pygame.Surface,
+        pos: Tuple[float, float],
+        constraint: int,
+        speed: int,
+    ) -> None:
         """Initialize the Dinosaur class.
+
         Args:
             screen: our display surface for the game.
             pos: a tuple representing the position of the robot.
@@ -37,9 +43,12 @@ class Robot(pygame.sprite.Sprite):
         self.health_bar_length = 50
         self.health_ratio = self.max_health / self.health_bar_length
 
-    def get_input(self):
-        """This  method is used to get the keyboard inputs and convert them
-        into actions."""
+    def get_input(self) -> None:
+        """
+        This  method is used to get the keyboard inputs and convert them
+        into actions.
+
+        """
         keys = pygame.key.get_pressed()
 
         # Move Right
@@ -76,8 +85,9 @@ class Robot(pygame.sprite.Sprite):
             self.rect.x -= self.speed
             self.rect.y -= self.speed
 
-    def get_damage(self, amount: int):
+    def get_damage(self, amount: int) -> int:
         """This method is used to calculate the health of robot after taking an amount of damage.
+
         Args:
             amount: the amount of taken damage."""
         if self.current_health > 0:
@@ -86,7 +96,7 @@ class Robot(pygame.sprite.Sprite):
             self.current_health = 0
         return self.current_health
 
-    def basic_health(self):
+    def basic_health(self) -> Tuple[float, Any]:
         """This method is used to display the health bar of our robot."""
         health_bar_value = self.current_health / self.health_ratio
 
@@ -102,7 +112,7 @@ class Robot(pygame.sprite.Sprite):
         )
         return health_bar_value, draw
 
-    def recharge(self):
+    def recharge(self) -> None:
         """This method is used to recharge the weapon after shooting cooldown."""
         if not self.ready:
             current_time = pygame.time.get_ticks()
@@ -110,7 +120,7 @@ class Robot(pygame.sprite.Sprite):
             if current_time - self.laser_time >= self.laser_cooldown:
                 self.ready = True
 
-    def update(self):
+    def update(self) -> None:
         """This method is used to update the positions, recharge the weapon and calculate
         the robot's health."""
         self.get_input()
@@ -119,7 +129,7 @@ class Robot(pygame.sprite.Sprite):
         self.lasers.update()
         self.basic_health()
 
-    def shoot_laser(self):
+    def shoot_laser(self) -> None:
         """This method is used to shoot laser from the robot's weapon."""
         self.lasers.add(
             Laser(
@@ -129,7 +139,7 @@ class Robot(pygame.sprite.Sprite):
             )
         )
 
-    def constraint(self):
+    def constraint(self) -> None:
         """This method limits the movement of the robot inside the simulation space."""
         if self.rect.left <= 0:
             self.rect.left = 0

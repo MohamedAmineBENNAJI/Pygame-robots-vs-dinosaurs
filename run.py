@@ -1,6 +1,7 @@
 """ This module executes the game and its different scenarios."""
 import logging
 import sys
+from typing import Any, List
 
 import pygame
 from absl import app, flags
@@ -20,16 +21,16 @@ flags.DEFINE_integer(
     800,
     "the timer in milliseconds for a random dinosaur to shoot.",
 )
-flags.DEFINE_bool(
+flags.DEFINE_integer(
     "moving_dinosaurs",
-    False,
-    "This boolean specifies if the dinosaurs are moving or not",
+    0,
+    "This boolean specifies the dinosaur moving direction if it's moving",
 )
 
 FLAGS = flags.FLAGS
 
 
-def main(argv):
+def main(argv: List[Any]) -> None:
     """This function defines the main pipeline of the game."""
     flags.mark_flag_as_required("screen_width")
     flags.mark_flag_as_required("screen_height")
@@ -73,11 +74,9 @@ def main(argv):
         screen.fill((30, 30, 30))
         game.run()
 
-
         pygame.display.flip()
         clock.tick(60)
     logging.info(f"Final Score:{game.score}")
-
 
 
 if __name__ == "__main__":

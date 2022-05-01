@@ -14,7 +14,7 @@ class Laser(pygame.sprite.Sprite):
         screen_height: int,
         speed: int,
         surface_dimensions: Tuple[int, int] = (4, 20),
-    ):
+    ) -> None:
         """Initialize the Laser class.
         Args:
             pos: the position of the laser within the character.
@@ -30,13 +30,13 @@ class Laser(pygame.sprite.Sprite):
         self.speed = speed
         self.height_y_constraint = screen_height
 
-    def update(self):
+    def update(self) -> int:
         """This method is used to move and destroy the laser shot."""
         self.rect.y += self.speed
         self.destroy()
         return self.rect.y
 
-    def destroy(self):
+    def destroy(self) -> bool:
         """This method is used to destroy the laser after meeting certain conditions."""
         condition = self.rect.y <= -50 or self.rect.y >= self.height_y_constraint + 50
         if condition:

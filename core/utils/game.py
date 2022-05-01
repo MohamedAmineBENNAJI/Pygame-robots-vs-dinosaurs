@@ -2,10 +2,11 @@
 import logging
 import sys
 from random import choice, randint
-from typing import List
+from typing import Any, List, Tuple
+
+import pygame
 
 import core.utils.obstacle as obstacle
-import pygame
 from core.utils.dinosaur import Dinosaur, Monster
 from core.utils.generic_utils import load_font, load_image
 from core.utils.laser import Laser
@@ -25,8 +26,8 @@ class Game:
         number_of_dinosaur_rows: int,
         number_of_dinosaur_cols: int,
         obstacle_amount: int,
-        moving_dinosaurs: bool,
-    ):
+        moving_dinosaurs: int,
+    ) -> None:
         """This method initializes our Game class with initial parameters.
         Args:
             screen: our display surface for the game.
@@ -86,7 +87,7 @@ class Game:
         self.monster_dinosaur = pygame.sprite.GroupSingle()
         self.extra_spawn_time = randint(40, 80)
 
-    def create_obstacle(self, x_start: int, y_start: int, offset_x: int):
+    def create_obstacle(self, x_start: float, y_start: float, offset_x: Any) -> int:
         """This method is used to create an obstacle at a specific position.
         Args:
             x_start: the starting position for x.
@@ -108,10 +109,10 @@ class Game:
 
     def create_multiple_obstacles(
         self,
-        *offset: List[int],
-        x_start: int,
+        *offset: Any,
+        x_start: float,
         y_start: int,
-    ):
+    ) -> int:
         """This method is used to create multiple obstaclse at specific positions.
         Args:
             offset: A list containing multiple offsets for our obstacles.
@@ -127,7 +128,7 @@ class Game:
             number_of_obstacles += 1
         return number_of_obstacles
 
-    def dinosaur_position_checker(self):
+    def dinosaur_position_checker(self) -> None:
         """This method is used to check the direction for our dinosaurs and define
         their movement."""
         all_dinosaurs = self.dinosaurs.sprites()
@@ -138,7 +139,7 @@ class Game:
             elif dinosaur.rect.left <= 0:
                 self.dinosaur_direction = 1
 
-    def dinosaur_move_down(self, distance: int):
+    def dinosaur_move_down(self, distance: int) -> None:
         """This method is used to move down dinosaurs and according to a specific distance.
         Args:
             distance: the movement step size for dinosaurs."""
@@ -157,7 +158,7 @@ class Game:
         y_distance: int = 90,
         x_offset: int = 70,
         y_offset: int = 150,
-    ):
+    ) -> Tuple[int, List[Tuple[int, int]]]:
         """This method is used to setup the dinosaurs on the simulation space.
         Args:
             rows: number of rows containing dinosaurs.
@@ -191,7 +192,7 @@ class Game:
 
         return number_of_created_dinosaurs, positions
 
-    def monster_dinosaur_timer(self):
+    def monster_dinosaur_timer(self) -> None:
         """This method is used to set the timer for the monster dinosaur."""
         self.extra_spawn_time -= 1
         if self.extra_spawn_time <= 0:
@@ -200,7 +201,7 @@ class Game:
             )
             self.extra_spawn_time = randint(400, 800)
 
-    def dinosaur_shoot(self):
+    def dinosaur_shoot(self) -> bool:
         """This method is used to shoot laser from a random dinosaur."""
         shoot = False
         if self.dinosaurs.sprites():
@@ -213,9 +214,9 @@ class Game:
             )
             self.dinosaur_lasers.add(laser_sprite)
             shoot = True
-            return shoot
+        return shoot
 
-    def collision_checks(self):
+    def collision_checks(self) -> None:
         """This method is used to check the collision between different entities
         (robot, dinosaurs)."""
 
@@ -296,19 +297,21 @@ class Game:
             pygame.quit()
             sys.exit()
 
-    def display_lives(self):
+    def display_lives(self) -> None:
         """This method  is used to display the remaining lives for the robot."""
         for live in range(self.lives - 1):
-            x = self.live_x_start_position + (live * (self.live_surf.get_size()[0] + 10))
+            x = self.live_x_start_position + (
+                live * (self.live_surf.get_size()[0] + 10)
+            )
             self.screen.blit(self.live_surf, (x, 8))
 
-    def display_score(self):
+    def display_score(self) -> None:
         """This method is used to display the score for the game."""
         score_surface = self.font.render(f"score: {self.score}", False, "white")
         score_rect = score_surface.get_rect(topleft=(10, -10))
         self.screen.blit(score_surface, score_rect)
 
-    def run(self):
+    def run(self) -> None:
         """This method is used to run our game."""
         self.dinosaurs.update(self.dinosaur_direction)
         self.dinosaur_position_checker()

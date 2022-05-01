@@ -1,4 +1,3 @@
-import logging
 import sys
 
 import flask
@@ -8,7 +7,7 @@ from absl import app
 from core.utils.game import Game
 
 
-def dino_vs_robots():
+def dino_vs_robots() -> None:
     """This function executes the game."""
 
     screen_width = 600
@@ -38,7 +37,6 @@ def dino_vs_robots():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                print(f"Final Score:{game.score}")
 
                 pygame.quit()
                 sys.exit()
@@ -48,16 +46,17 @@ def dino_vs_robots():
 
         screen.fill((30, 30, 30))
         game.run()
+        print(f"Final Score:{game.score}")
 
         pygame.display.flip()
         clock.tick(60)
 
 
-app = flask.Flask(__name__)
+flask_app = flask.Flask(__name__)
 
 
 @app.route("/")
-def api_start():
+def api_start() -> None:
     """This function starts the game API."""
     print("WELCOME TO ROBOTS VS DINOSAURS game!")
 
@@ -66,4 +65,4 @@ def api_start():
 
 if __name__ == "__main__":
 
-    app.run(host="0.0.0.0", port=3000, debug=True, use_reloader=False)
+    flask_app.run(host="0.0.0.0", port=3000, debug=True, use_reloader=False)

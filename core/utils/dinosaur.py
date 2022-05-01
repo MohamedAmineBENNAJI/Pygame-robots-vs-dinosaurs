@@ -1,14 +1,17 @@
 """This module contains the implementation of Dinosaurs."""
 
 
+from typing import Any, Tuple
+
 import pygame
+
 from core.utils.generic_utils import load_image
 
 
 class Dinosaur(pygame.sprite.Sprite):
     """This class implements the Dinosaur character."""
 
-    def __init__(self, screen: pygame.Surface, color: str, x: int, y: int):
+    def __init__(self, screen: pygame.Surface, color: str, x: int, y: int) -> None:
         """Initialize the Dinosaur class.
         Args:
             screen: our display surface for the game.
@@ -35,17 +38,17 @@ class Dinosaur(pygame.sprite.Sprite):
         else:
             self.value = 300
 
-    def update(self, direction: int):
+    def update(self, direction: int) -> Tuple[Any, float]:
         """This method is used to update the dinosaurs directions if they are moving
         and calculate their healths.
         Args:
             direction: the dinosaur directions
             {0:stable,1:from right to left,-1:from left to right}."""
         self.rect.x += direction
-        health, _ = self.basic_health()
+        health, draw = self.basic_health()
         return self.rect.x, health
 
-    def get_damage(self, amount: int):
+    def get_damage(self, amount: int) -> int:
         """This method is used to calculate the health of dinosaurs after
         taking an amount of damage.
         Args:
@@ -58,7 +61,7 @@ class Dinosaur(pygame.sprite.Sprite):
             self.current_health = 0
         return self.current_health
 
-    def basic_health(self):
+    def basic_health(self) -> Tuple[float, Any]:
         """This method is used to display the health bar of our dinosaur.
         Returns:
             health: the dinosaur's health bar."""
@@ -80,7 +83,7 @@ class Dinosaur(pygame.sprite.Sprite):
 class Monster(pygame.sprite.Sprite):
     """This class implements the Monster Dinosaur."""
 
-    def __init__(self, screen: pygame.Surface, side: str, screen_width: int):
+    def __init__(self, screen: pygame.Surface, side: str, screen_width: int) -> None:
         """Initialize the Monster dinosaur class.
         Args:
             screen: our display surface for the game.
@@ -102,7 +105,7 @@ class Monster(pygame.sprite.Sprite):
             self.speed = 5
         self.rect = self.image.get_rect(topleft=(x, 80))
 
-    def get_damage(self, amount: int):
+    def get_damage(self, amount: int) -> int:
         """This method is used to calculate the health of dinosaurs
         after taking an amount of damage.
         Args:
@@ -113,7 +116,7 @@ class Monster(pygame.sprite.Sprite):
             self.current_health = 0
         return self.current_health
 
-    def basic_health(self):
+    def basic_health(self) -> Tuple[float, Any]:
         """This method is used to display the health bar of our dinosaur."""
         health_bar_value = self.current_health / self.health_ratio
         draw = pygame.draw.rect(
@@ -128,7 +131,7 @@ class Monster(pygame.sprite.Sprite):
         )
         return health_bar_value, draw
 
-    def update(self):
+    def update(self) -> Tuple[float, Any]:
         """This method is used to update the Monster dinosaur's position while moving
         and calculate his health."""
 

@@ -1,10 +1,21 @@
 """This module includes the tests for the game module."""
 
+from typing import List
+
+from core.utils.game import Game
+from core.utils.robot import Robot
+
 
 class TestGame:
     """This class tests the Game class."""
 
-    def test_create_obstacle(self, game_object, test_shape, screen_width, y_start=200):
+    def test_create_obstacle(
+        self,
+        game_object: Game,
+        test_shape: List[str],
+        screen_width: int,
+        y_start: int = 200,
+    ) -> None:
         """This method tests the creation of obstacles from Block class."""
         expected_number_of_created_blocks = 3
         game_object.shape = test_shape
@@ -18,12 +29,12 @@ class TestGame:
 
     def test_multiple_obstacles(
         self,
-        test_shape,
-        screen_width,
-        game_object,
-        offset=[0, 50],
-        y_start=200,
-    ):
+        test_shape: List[str],
+        screen_width: int,
+        game_object: Game,
+        offset: List[int] = [0, 50],
+        y_start: int = 200,
+    ) -> None:
         """This method tests creating multiple obstacles ."""
         expected_number_of_created_obstacles = 2
         game_object.shape = test_shape
@@ -39,19 +50,21 @@ class TestGame:
 
     def test_dinosaur_setup(
         self,
-        screen_width,
-        screen_height,
-        game_object,
-        rows=3,
-        cols=3,
-        x_distance=30,
-        y_distance=30,
-        x_offset=30,
-        y_offset=30,
-    ):
+        screen_width: int,
+        screen_height: int,
+        game_object: Game,
+        rows: int = 3,
+        cols: int = 3,
+        x_distance: int = 30,
+        y_distance: int = 30,
+        x_offset: int = 30,
+        y_offset: int = 30,
+    ) -> None:
         """This method tests the setup of dinosaurs in the simulation space."""
         # Testing if all Dinosaur positions will be on the simulation space
-        assert (cols - 1) * x_distance + x_offset <= screen_width, "Check x parameters !"
+        assert (
+            cols - 1
+        ) * x_distance + x_offset <= screen_width, "Check x parameters !"
         assert (
             rows - 1
         ) * y_distance + y_distance <= screen_height, "Check y parameters !"
@@ -67,15 +80,15 @@ class TestGame:
 
     def test_dinosaur_shoot(
         self,
-        game_object,
-        rows=3,
-        cols=3,
-        x_distance=30,
-        y_distance=30,
-        x_offset=30,
-        y_offset=30,
-        dinosaur_shooting_timer=800,
-    ):
+        game_object: Game,
+        rows: int = 3,
+        cols: int = 3,
+        x_distance: int = 30,
+        y_distance: int = 30,
+        x_offset: int = 30,
+        y_offset: int = 30,
+        dinosaur_shooting_timer: int = 800,
+    ) -> None:
         """This method tests if the dinosaurs shoots laser within the shooting
         timer or not."""
 
@@ -94,17 +107,17 @@ class TestGame:
 
     def test_run(
         self,
-        robot_object,
-        screen_width,
-        screen_height,
-        game_object,
-        rows=3,
-        cols=3,
-        x_distance=30,
-        y_distance=30,
-        x_offset=30,
-        y_offset=30,
-    ):
+        robot_object: Robot,
+        screen_width: int,
+        screen_height: int,
+        game_object: Game,
+        rows: int = 3,
+        cols: int = 3,
+        x_distance: int = 30,
+        y_distance: int = 30,
+        x_offset: int = 30,
+        y_offset: int = 30,
+    ) -> None:
         """This method tests some of the functionalities of the game."""
         # Create robot with a default position of ((screen_width / 2, screen_height))
         robot_position = (screen_width / 2, screen_height)
