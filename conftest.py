@@ -11,9 +11,10 @@ from core.utils.laser import Laser
 from core.utils.robot import Robot
 
 try:
-        os.environ["DISPLAY"]
-    except:
-        os.environ["SDL_VIDEODRIVER"] = "dummy"
+    os.environ["DISPLAY"]
+except pygame.error:
+    os.environ["SDL_VIDEODRIVER"] = "dummy"
+
 
 @pytest.fixture(scope="session")
 def surface_dimensions() -> Tuple[int, int]:

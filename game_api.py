@@ -2,7 +2,6 @@ import sys
 
 import flask
 import pygame
-from absl import app
 
 from core.utils.game import Game
 
@@ -55,7 +54,7 @@ def dino_vs_robots() -> None:
 flask_app = flask.Flask(__name__)
 
 
-@app.route("/")
+@flask_app.route("/")
 def api_start() -> None:
     """This function starts the game API."""
     print("WELCOME TO ROBOTS VS DINOSAURS game!")
